@@ -1,0 +1,171 @@
+body {
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    
+    height: 100vh;
+    width: 100vw;
+    
+    font-family: 'Varela Round', sans-serif;
+    color: white;
+    font-size: 18px;
+}
+
+#background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+#container {
+    overflow: hidden;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    align-self: center;
+    padding: 1rem;
+    z-index: 100;
+}
+
+#about {
+    max-width: 20rem;
+}
+
+#panel {
+    flex-grow: 100;
+}
+
+a {
+    color: white;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: blue;
+}
+
+.flex {
+    display: flex;
+}
+
+.fl-row {
+    flex-flow: row;
+}
+
+.fl-col {
+    flex-flow: column;
+}
+
+.al-fs {
+    align-items: flex-start;
+}
+
+.al-fe {
+    align-items: flex-end;
+}
+
+.al-ce {
+    align-items: center;
+}
+
+.al-st {
+    align-items: stretch;
+}
+
+.al-bl {
+    align-items: baseline;
+}
+
+.s10 {
+    font-size: 1em;
+}
+
+.s14 {
+    font-size: 1.4em;
+}
+
+.s16 {
+    font-size: 1.6em;
+}
+
+.s18 {
+    font-size: 1.8em;
+}
+
+.s20 {
+    font-size: 20em;
+}
+
+.s24 {
+    font-size: 2.4em;
+}
+
+.s28 {
+    font-size: 2.8em;
+}
+
+.s30 {
+    font-size: 3em;
+}
+
+.s32 {
+    font-size: 3.2em;
+}
+
+.s36 {
+    font-size: 3.6em;
+}
+
+.s38 {
+    font-size: 3.8em;
+}
+
+.h08 {
+    height: 0.8rem;
+}
+
+.h10 {
+    height: 1rem;
+}
+
+.h20 {
+    height: 2rem;
+}
+
+.spacer {
+    flex-grow: 100;
+}
+
+@media screen and (min-width: 600px) {
+    .desktop-spacer {
+        flex-grow: 100;
+    }
+    
+    #panel {
+        flex-flow: row;
+        flex-grow: 1;
+    }
+    
+    #menus {
+        align-self: flex-end;
+    }
+}
+
+@supports(-webkit-touch-callout: none) {
+    @media (orientation: portrait) {
+        #ios-bar-fix {
+            height: calc(44pt + 1rem);
+        }
+    }
+}
