@@ -2,10 +2,10 @@ body {
     background-color: black;
     padding: 0;
     margin: 0;
-    
+
     height: 100vh;
     width: 100vw;
-    
+
     font-family: 'Varela Round', sans-serif;
     color: white;
     font-size: 18px;
@@ -33,6 +33,17 @@ body {
 
 #panel {
     flex-grow: 100;
+}
+
+#agenda {
+  width: 500px;
+  height: 500px;
+  background-color: green;
+  top: 10px;
+  left: 10px;
+  display: block;
+  position: absolute;
+  z-index: 100;
 }
 
 a {
@@ -151,12 +162,12 @@ a:active {
     .desktop-spacer {
         flex-grow: 100;
     }
-    
+
     #panel {
         flex-flow: row;
         flex-grow: 1;
     }
-    
+
     #menus {
         align-self: flex-end;
     }

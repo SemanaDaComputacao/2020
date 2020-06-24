@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XII Semana da Computação</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="res/Icon.png"/>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="background"></canvas>
+    <div id="container" class="flex fl-col">
+        <div id="header" class="flex fl-col">
+            <div class="flex fl-row">
+                <div class="s38">XII</div>
+                <div class="flex fl-col">
+                    <div style="height: 6pt;"></div>
+                    <div class="s14">Semana da</div>
+                    <div class="s14">Computação</div>
+                </div>
+            </div>
+            <div>De 16 à 20 de agosto de 2020</div>
+        </div>
+        <div class="h20"></div>
+        <div class="desktop-spacer"></div>
+        <div id="panel" class="flex fl-col">
+            <div id="about" class="flex fl-col">
+                <div>
+                    Bem vindo a semana de palestras da semana da computação, serão 12 palestras sobre temas na área com especialistas da academia e do mercado.
+                </div>
+                <div class="h10"></div>
+                <div>
+                    Esse ano teremos um evento 100% online para você acompanhar de qualquer lugar!
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div id="menus" class="flex fl-col al-fe">
+                <a href="">palestra ao vivo</a><div class="h08"></div>
+                <a onclick="toogleAgenda()">agenda de palestras</a><div class="h08"></div>
+                <a href="">redes sociais</a><div class="h08"></div>
+                <a href="">sobre a Semana</a><div class="h08"></div>
+                <a href="">edições anteriores</a><div class="h08"></div>
+            </div>
+        </div>
+        <div id="ios-bar-fix"></div>
+    </div>
+    <div id="agenda">
+      <pre id="res"></pre>
+    </div>
+    <script>
+    function toogleAgenda() {
+      if(document.querySelector("#agenda").style.display == "none")
+        document.querySelector("#agenda").style.display = "block"
+      else
+        document.querySelector("#agenda").style.display = "none"
+      update()
+    }
+
+    async function update() {
+      var t = await fetch("https://sheets.googleapis.com/v4/spreadsheets/1IBa3rhKxT5d2nZ5Xt_Emu1TbdTQmu9fHykOVgH_w2kk/values/'agenda'?key=AIzaSyCpJTBjPXD18VFy7nKKM8z-AsYxBRW7gZY")
+      var json = await t.json()
+      document.querySelector("#agenda").innerHTML = json.values
+    }
+    </script>
+    <script src="matrix.js"></script>
+</body>
+</html>
