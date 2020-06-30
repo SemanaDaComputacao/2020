@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<!-- Written by (Vitor) Silva e Silva elUrso@github-->
+<!-- Written by (Vitor) Silva e Silva elUrso@github -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>XII Semana da Computação</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" href="res/Icon.png"/>
+    <link rel="icon" type="image/png" href="res/Icon.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="res/Icon@2x.png" sizes="32x32">
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"/>
     <style>
       :root {
         /*Colors*/
-        --bg-color: blue;/*#111111;*/
+        --bg-color: #116611;
         --bg-color-like: #111111A8;
         --bg-color-light: #11111142;
         --bg-color-strong: #111111f0;
@@ -18,6 +20,8 @@
         --great-white: #f0f0f0;
         /*Z-index references*/
         --z-foreground: 1000;
+        --z-middleground: 500;
+        --z-background: -1;
         /*Others*/
         --pi: 3.14159265359;
         --tau: 6.28318530718;
@@ -89,6 +93,7 @@
         padding: 1rem;
         width: calc(100% - 2rem);
         min-height: calc(100% - 2rem);
+        z-index: var(--z-middleground);
       }
       
       #title {
@@ -149,12 +154,30 @@
         width: 100%;
         height: 100%;
         z-index: var(--z-foreground);
-        animation: move-in 0.8s ease;
       }
-      
-      @keyframes move-in {
-          0% { transform: scale(0.5); }
-        100% { transform: scale(1.0); }
+    
+      #close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        size: 6rem;
+        height: 2rem;
+        width: 2rem;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 2rem;
+        border: 1px dashed white;
+      }
+    
+      /*Canvas*/
+      #matrix {
+          z-index: var(--z-background);
+          background-color: #000000;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
       }
       
       /*General*/
@@ -185,10 +208,18 @@
         width: 0.6rem;
         height: 0.6rem;
         margin: 0.4rem 0rem 0.4rem 0.4rem;
+        animation: blinky 1.5s linear infinite;
+      }
+    
+      @keyframes blinky {
+          0% { background-color: #ff0000ff; }
+          50% { background-color: #ff000000; }
+          100% { background-color: #ff0000ff; }
       }
     </style>
 </head>
-<body>
+<body onresize="init_matrix()">
+  <canvas id="matrix"></canvas>
   <div id="loading_screen">
     <div class="loader"></div>
     <p>Loading Content</p>
@@ -223,16 +254,16 @@
     <div class="spacer"></div>
     
     <div id="buttons" class="v-stack">
-      <div class="btn">palestra ao vivo <div class="red-dot"></div></div>
-      <div class="btn">agenda de palestras</div>
-      <div class="btn">redes sociais</div>
-      <div class="btn">sobre a Semana</div>
-      <div class="btn">edições anteriores</div>
+      <div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>
+      <div class="btn" onclick="showOverlay()">agenda de palestras</div>
+      <div class="btn" onclick="showOverlay()">redes sociais</div>
+      <div class="btn" onclick="showOverlay()">sobre a Semana</div>
+      <div class="btn" onclick="showOverlay()">edições anteriores</div>
     </div>
   </div>
   
-  <div id="overlay">
-    <div class="close-btn"></div>
+  <div id="overlay" style="display: none">
+    <div id="close-btn" onclick="closeOverlay()">X</div>
     Hi!
   </div>
   
@@ -240,6 +271,73 @@
     window.onload = () => {
       document.querySelector("#loading_screen").style.display = "none"
     }
+  
+    let update = 0
+    let ctx = 0
+    let canvas = 0
+    let letters = []
+    let size = 10
+    let source = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*!()*&^%あいうおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろわゐゑを";
+    
+    let draw = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.042)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = "#0A0";
+      ctx.font = size + "px arial";
+      
+      if(letters.length < Math.floor((canvas.width/size) * (canvas.height/size/12)))
+        addLetter()
+      
+      letters.forEach(x => {
+        ctx.fillText(source[x.d*x.i % source.length], x.x, x.y);
+        x.y += size
+        x.i -= 1
+        if(x.y > canvas.height) x.y = 0
+      })
+      
+      /* Kill dead letters */
+      letters = letters.filter(x => x.i > 0)
+      
+      update = setTimeout(draw, 50)
+    }
+         
+    let addLetter = () => {
+      letters.push({
+        x: Math.floor(Math.random() * (canvas.width/size)) * size,
+        y: Math.floor(Math.random() * (canvas.height/size)) * size,
+        d: Math.floor(Math.random()*18 + 3),
+        i: Math.floor(Math.random()*42+16)
+      })
+    }
+  
+    let init_matrix = () => {
+      clearTimeout(update)
+      canvas = document.querySelector("#matrix")
+      canvas.height = canvas.offsetHeight
+      canvas.width = canvas.offsetWidth
+      
+      ctx = canvas.getContext("2d")
+      
+      update = setTimeout(draw, 0)
+    }
+                      
+    let duration = 250
+                      
+    let closeOverlay = () => {
+      let overlay = document.querySelector("#overlay")
+      overlay.animate([{scale: 1.0, opacity: 1},{scale:0.5, opacity: 0}], duration)
+      setTimeout(()=>{overlay.style.display = "none"}, duration)
+    }
+                      
+    let showOverlay = () => {
+      let overlay = document.querySelector("#overlay")
+      overlay.style.display = "block"
+      overlay.animate([{scale: 1.0, opacity: 0},{scale:0.5, opacity: 1}], duration)
+    }
+  
+    init_matrix()
+    
   </script>
 <body>
 </html>
