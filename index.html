@@ -159,8 +159,9 @@
     
       #close-btn {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        background-color: black;
+        top: 2rem;
+        right: 2rem;
         size: 6rem;
         height: 2rem;
         width: 2rem;
@@ -172,6 +173,25 @@
     
       #close-btn:hover {
         cursor: pointer;
+      }
+    
+      #overlay-viewport {
+        border: 1px solid white;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+        overflow: scroll;
+        margin: 1rem;
+      }
+    
+      .panel {
+        padding: 1rem 1rem 0rem 1rem;
+      }
+    
+      .noticia {
+        background-color: #222222;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
       }
     
       /*Canvas*/
@@ -216,6 +236,10 @@
         animation: blinky 1.5s linear infinite;
       }
     
+    hr {
+      margin: 0;
+    }
+    
       @keyframes blinky {
           0% { background-color: #ff0000ff; }
           50% { background-color: #ff000000; }
@@ -259,7 +283,8 @@
     <div class="spacer"></div>
     
     <div id="buttons" class="v-stack">
-      <div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>
+      <!--<div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>-->
+      <div class="btn" onclick="showOverlay()">notícias</div>
       <div class="btn" onclick="showOverlay()">agenda de palestras</div>
       <div class="btn" onclick="showOverlay()">redes sociais</div>
       <div class="btn" onclick="showOverlay()">sobre a Semana</div>
@@ -269,7 +294,50 @@
   
   <div id="overlay" style="display: none">
     <div id="close-btn" onclick="closeOverlay()">X</div>
-    Hi!
+    <div id="overlay-viewport">
+      <!--<div id="overlay-aovivo" class="panel">
+        <h1>
+          Acontecendo agora:
+        </h1>
+        <p>Falta implementar ainda</p>
+      </div>-->
+      <div id="overlay-noticias" class="panel">
+        <h1> Notícias </h1>
+        <div id="container-noticias">
+          <div class="noticia">
+            <h3> Hello World! </h3>
+            <p>
+              Estamos organizando a semana, fiquem atentos ao site!
+            </p>
+            <h6> Vitor Silva @ 21:00, 17/06 </h6>
+          </div>
+          <div class="noticia">
+            <h3> Hello World! </h3>
+            <p>
+              Estamos organizando a semana, fiquem atentos ao site!
+            </p>
+            <h6> Vitor Silva @ 21:00, 17/06 </h6>
+          </div>
+        </div>
+        <hr/>
+      </div>
+      <div id="overlay-agenda" class="panel">
+        <h1>Agenda</h1>
+        <hr/>
+      </div>
+      <div id="overlay-redes" class="panel">
+        <h1>Redes Sociais</h1>
+        <hr/>
+      </div>
+      <div id="overlay-sobre" class="panel">
+        <h1>Sobre</h1>
+        <hr/>
+      </div>
+      <div id="overlay-anteriores" class="panel">
+        <h1>Anos Anteriores</h1>
+        <hr/>
+      </div>
+    </div>
   </div>
   
   <script>
@@ -288,10 +356,10 @@
       ctx.fillStyle = "rgba(0, 0, 0, 0.042)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = "#0A0";
+      ctx.fillStyle = "#090";
       ctx.font = size + "px arial";
       
-      if(letters.length < Math.floor((canvas.width/size) * (canvas.height/size/12)))
+      if(letters.length < (canvas.width/size) * Math.ceil(canvas.width/size/12) )
         addLetter()
       
       letters.forEach(x => {
@@ -304,7 +372,7 @@
       /* Kill dead letters */
       letters = letters.filter(x => x.i > 0)
       
-      update = setTimeout(draw, 50)
+      update = setTimeout(draw, 62)
     }
          
     let addLetter = () => {
@@ -312,7 +380,7 @@
         x: Math.floor(Math.random() * (canvas.width/size)) * size,
         y: Math.floor(Math.random() * (canvas.height/size)) * size,
         d: Math.floor(Math.random()*18 + 3),
-        i: Math.floor(Math.random()*42+16)
+        i: Math.floor(Math.random()*42+16+Math.ceil(canvas.width/size/12)*12)
       })
     }
   
@@ -334,7 +402,7 @@
       overlay.animate([{scale: 1.0, opacity: 1},{scale:0.5, opacity: 0}], duration)
       setTimeout(()=>{overlay.style.display = "none"}, duration)
     }
-                      
+
     let showOverlay = () => {
       let overlay = document.querySelector("#overlay")
       overlay.style.display = "block"
@@ -342,7 +410,45 @@
     }
   
     init_matrix()
+                      
+    let fetchData = async () => {
+      let agendaFetch = await fetch("data/agenda.json")
+      let agendaJson = await agendaFetch.json()
+      let noticiasFetch = await fetch("data/noticias.json")
+      var noticiasJson = await noticiasFetch.json()
+      return [agendaJson, noticiasJson]
+    }
+                      
+    let parse = (data) => {
+      let fields = data.values[0]
+      let res = []
+      for(let i = 1; i < data.values.length; i++) {
+        let obj = {}
+        for(let j = 0; j < fields.length; j++) {
+          obj[fields[j]] = data.values[i][j]
+        }
+        res.push(obj)
+      }
+      return res
+    }
+                      
+    let generateNoticias = (n) => {
+      let res = ""
+      for(let noticia of n) {
+        console.log(noticia)
+        res = res + `<div class="noticia"><h3>${noticia["Título"]}</h3><p>${noticia["Corpo"]}</p><h6> ${noticia["Autor"]} @ ${noticia["Horário"]}, ${noticia["Data"]} </h6></div>`
+      }
+      return res
+    }
+                      
+    let refreshSite = async () => {
+      let res = await fetchData()
+      let noticias = parse(res[1])
+      console.log(noticias)
+      document.querySelector("#container-noticias").innerHTML = generateNoticias(noticias)
+    }
     
+    refreshSite()
   </script>
 <body>
 </html>

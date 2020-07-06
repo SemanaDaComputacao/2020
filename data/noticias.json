@@ -1,0 +1,27 @@
+{
+  "range": "noticias!A1:Z1000",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "Título",
+      "Corpo",
+      "Autor",
+      "Data",
+      "Horário"
+    ],
+    [
+      "Hello World",
+      "Estamos organizando a semana. Fiquem atentos ao site 😉.",
+      "Vitor Silva",
+      "17/06",
+      "21:00"
+    ],
+    [
+      "22,22%",
+      "22,22% dos palestrantes já fecharam datas! Yess!",
+      "Silva e Silva",
+      "23/06",
+      "20:30"
+    ]
+  ]
+}
