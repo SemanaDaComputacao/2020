@@ -386,11 +386,20 @@
   
     let init_matrix = () => {
       clearTimeout(update)
+      let flag = false
+      let img
+      if(canvas != 0) {
+        flag = true
+        img = ctx.getImageData(0,0,canvas.width,canvas.height)
+      }
+      
       canvas = document.querySelector("#matrix")
       canvas.height = canvas.offsetHeight
       canvas.width = canvas.offsetWidth
       
       ctx = canvas.getContext("2d")
+      
+      if(flag) ctx.putImageData(img,0,0)
       
       update = setTimeout(draw, 0)
     }
