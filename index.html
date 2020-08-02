@@ -94,6 +94,7 @@
         width: calc(100% - 2rem);
         min-height: calc(100% - 2rem);
         z-index: var(--z-middleground);
+        max-width: calc(var(--tau) * 4rem);
       }
       
       #title {
@@ -156,6 +157,18 @@
         height: 100%;
         z-index: var(--z-foreground);
       }
+
+      @media(min-width: 60rem) {
+        #overlay {
+          background-color: var(--bg-color-strong);
+          position: fixed;
+          top: 2rem;
+          left: calc(var(--tau) * 4rem + 2rem);
+          width: calc(100% - var(--tau) * 4rem - 4rem);
+          height: calc(100% - 4rem);
+          z-index: var(--z-foreground);
+        }
+      }
     
       #close-btn {
         position: absolute;
@@ -189,9 +202,73 @@
     
       .noticia {
         background-color: #222222;
-        padding: 0.5rem 1rem 0.5rem 1rem;
-        border-radius: 1rem;
+        padding: 0.2rem 1rem 0.2rem 1rem;
         margin-bottom: 1rem;
+        font-size: 0.8rem;
+        border: 1px solid white;
+      }
+
+      .agenda {
+        background-color: #222222;
+        padding: 0.2rem 1rem 0.2rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid white;
+
+        display: flex;
+        flex-flow: row;
+      }
+
+      .agenda>.left {
+        margin: 0.8rem 0rem 0.8rem 0rem;
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        width: 3rem;
+
+        font-size: 0.8rem;
+      }
+
+      .agenda>.left>.card {
+        border: 1px solid white;
+        text-align: center;
+      }
+
+      .agenda>.left>.card>.month {
+        border-bottom: 1px solid white;
+        font-size: 0.8rem;
+      }
+
+      .agenda>.left>.card>.day {
+        font-size: 2rem;
+      }
+
+      .agenda>.right {
+        margin: 0.8rem 0rem 0.8rem 1rem;
+        display: flex;
+        flex-flow: column;
+      }
+
+      .agenda>.right>.title {
+        font-weight: bold;
+        padding-bottom: 0.2rem;
+      }
+      .agenda>.right>.palestrante {
+        font-size: 0.8rem;
+        padding-bottom: 0.4rem;
+      }
+
+      .agenda>.right>.sinopse {
+        font-size: 0.8rem;
+        padding-bottom: 0.4rem;
+      }
+
+      .agenda .esconde {
+        text-decoration: underline;
+        font-size: 0.8rem;
+      }
+
+      .agenda .esconde:hover {
+        cursor: pointer;
       }
     
       /*Canvas*/
@@ -284,8 +361,8 @@
     
     <div id="buttons" class="v-stack">
       <!--<div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>-->
-      <div class="btn" onclick="showOverlay()">notícias</div>
-      <div class="btn" onclick="showOverlay()">agenda de palestras</div>
+      <div class="btn" onclick="showOverlay();sct('agenda')">agenda de palestras</div>
+      <div class="btn" onclick="showOverlay();sct('noticias')">notícias</div>
       <div class="btn" onclick="showOverlay()">redes sociais</div>
       <div class="btn" onclick="showOverlay()">sobre a Semana</div>
       <div class="btn" onclick="showOverlay()">edições anteriores</div>
@@ -301,6 +378,39 @@
         </h1>
         <p>Falta implementar ainda</p>
       </div>-->
+      
+      <div id="overlay-agenda" class="panel">
+        <h1>Agenda</h1>
+        <div id="container-agenda">
+          <div class="agenda" id="agenda123">
+            <div class="left">
+              <div class="card">
+                <div class="month">
+                  set
+                </div>
+                <div class="day">
+                  9
+                </div>
+              </div>
+              <div class="weekday">
+                sábado
+              </div>
+              <div class="from">
+                19:00
+              </div>
+              <div class="to">
+                20:15
+              </div>
+            </div>
+            <div class="right">
+              <div class="title">Titulo Maroto</div>
+              <div class="palestrante">Fabrício Oliveira Marques, PUC</div>
+              <div class="sinopse">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit mollitia nostrum vero ut fugiat voluptate harum quidem quas, quasi voluptatem rerum reiciendis ipsam facilis provident praesentium officiis ex, nobis nesciunt!</div>
+              <div class="esconde" onclick="clck('123')">mostra sinopse</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="overlay-noticias" class="panel">
         <h1> Notícias </h1>
         <div id="container-noticias">
@@ -319,23 +429,21 @@
             <h6> Vitor Silva @ 21:00, 17/06 </h6>
           </div>
         </div>
-        <hr/>
-      </div>
-      <div id="overlay-agenda" class="panel">
-        <h1>Agenda</h1>
-        <hr/>
       </div>
       <div id="overlay-redes" class="panel">
         <h1>Redes Sociais</h1>
-        <hr/>
       </div>
       <div id="overlay-sobre" class="panel">
         <h1>Sobre</h1>
-        <hr/>
       </div>
       <div id="overlay-anteriores" class="panel">
         <h1>Anos Anteriores</h1>
-        <hr/>
+        <p>.</p>
+        <p>.</p>
+        <p>.</p>
+        <p>.</p>
+        <p>.</p>
+        <p>.</p>
       </div>
     </div>
   </div>
@@ -414,8 +522,10 @@
 
     let showOverlay = () => {
       let overlay = document.querySelector("#overlay")
-      overlay.style.display = "block"
-      overlay.animate([{scale: 1.0, opacity: 0},{scale:0.5, opacity: 1}], duration)
+      if(overlay.style.display != "block") {
+        overlay.style.display = "block"
+        overlay.animate([{scale: 1.0, opacity: 0},{scale:0.5, opacity: 1}], duration)
+      }
     }
   
     init_matrix()
@@ -444,17 +554,47 @@
     let generateNoticias = (n) => {
       let res = ""
       for(let noticia of n) {
-        console.log(noticia)
         res = res + `<div class="noticia"><h3>${noticia["Título"]}</h3><p>${noticia["Corpo"]}</p><h6> ${noticia["Autor"]} @ ${noticia["Horário"]}, ${noticia["Data"]} </h6></div>`
+      }
+      return res
+    }
+
+    let generateAgenda = (a) => {
+      let res = ""
+      let id = 1
+      for(let agenda of a) {
+        console.log(agenda)
+        res = res + `<div class="agenda" id="agenda${id}"><div class="left"><div class="card"><div class="month">${agenda["Mes"]}</div><div class="day">${agenda["Dia"]}</div></div><div class="weekday">${agenda["Dia da Semana"]}</div><div class="from">${agenda["Início"]}</div><div class="to">${agenda["Fim"]}</div></div><div class="right"><div class="title">${agenda["Título"]}</div><div class="palestrante">${agenda["Palestrante"]}, ${agenda["Origem"]}</div><div class="sinopse" style="display: none;">${agenda["Sinopse"]}</div><div class="esconde" onclick="clck('${id}')">mostra sinopse</div></div></div>`
+        id = id + 1
       }
       return res
     }
                       
     let refreshSite = async () => {
       let res = await fetchData()
+      let agenda = parse(res[0])
       let noticias = parse(res[1])
       console.log(noticias)
       document.querySelector("#container-noticias").innerHTML = generateNoticias(noticias)
+      document.querySelector("#container-agenda").innerHTML = generateAgenda(agenda)
+    }
+
+    let sct = (name) => {
+      document.querySelector(`#overlay-${name}`).scrollIntoView()
+    }
+    
+    let clck = (id) => {
+      console.log(id)
+      let parent = document.querySelector(`#agenda${id}`)
+      let sinopse = parent.children[1].children[2]
+      let esconde = parent.children[1].children[3]
+      if(sinopse.style.display != "none") {
+        sinopse.style.display = "none"
+        esconde.innerHTML = "mostra sinopse"
+      } else {
+        sinopse.style.display = "block"
+        esconde.innerHTML = "esconde sinopse"
+      }
     }
     
     refreshSite()
