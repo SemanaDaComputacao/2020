@@ -270,6 +270,37 @@
       .agenda .esconde:hover {
         cursor: pointer;
       }
+
+      @media (min-width: 70rem) {
+        #container-agenda {
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+
+        .agenda {
+          width: calc(50% - 3rem);
+        }
+      }
+
+      .anteriores .btn {
+        background-color: var(--bg-color-like);
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border-radius: 2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        display:inline-flex;
+        box-shadow: 0rem 0.1rem 0.2rem 0.1rem var(--bg-color-light);
+        text-decoration: underline;
+      }
+      
+      .anteriores .btn:hover {
+        cursor: pointer;
+        box-shadow: 0rem 0.1rem 0rem 0rem var(--bg-color-light);
+        transition: box-shadow 0.5s;
+      }
     
       /*Canvas*/
       #matrix {
@@ -436,14 +467,18 @@
       <div id="overlay-sobre" class="panel">
         <h1>Sobre</h1>
       </div>
-      <div id="overlay-anteriores" class="panel">
+      <div id="overlay-anteriores" class="panel anteriores">
         <h1>Anos Anteriores</h1>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
+        <div class="btn" href="https://bcc.ime.usp.br/semana/">XI 2019</div>
+        <div class="btn" href="https://bcc.ime.usp.br/semana-old/2018">X 2018</div>
+        <div class="btn" href="https://bcc.ime.usp.br/encontro/2017">IX 2017</div>
+        <div class="btn" href="http://bcc.ime.usp.br/encontro/2016/#/">VIII 2016</div>
+        <div class="btn" href="http://bcc.ime.usp.br/encontro/2015">VII 2015</div>
+        <div class="btn" href="http://bcc.ime.usp.br/40anos/">VI 2014</div>
+        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2013/">V 2013</div>
+        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2012/">IV 2012</div>
+        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2011/">III 2011</div>
+        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2010/">II 2010</div>
       </div>
     </div>
   </div>
