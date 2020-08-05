@@ -284,6 +284,38 @@
         }
       }
 
+      #equipe {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      #equipe>.card {
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        padding: 1rem 0.5rem 1rem 0.5rem;
+      }
+
+      @media (min-width: 30rem) {
+        #equipe>.card {
+          padding: 1rem;
+        }
+      }
+
+      #equipe .photo {
+        height: 8rem;
+        width: 8rem;
+        border-radius: 4rem;
+        margin-bottom: 0.4rem;
+        box-shadow: 0rem 0rem 0.8rem 0px rgba(0,143,0,1);
+      }
+
+      #equipe .name {
+        font-weight: bold;
+      }
+
       .anteriores .btn {
         background-color: var(--bg-color-like);
         padding: 0.5rem 1rem 0.5rem 1rem;
@@ -344,9 +376,30 @@
         animation: blinky 1.5s linear infinite;
       }
     
-    hr {
-      margin: 0;
-    }
+      hr {
+        margin: 0;
+      }
+
+      .spacerXLL {
+        height: 70%;
+      }
+
+      a.nostyle {
+        color: inherit; /* blue colors for links too */
+        text-decoration: inherit; /* no underline */
+      }
+
+      a.nostyle:visited {
+        color: inherit; /* blue colors for links too */
+        text-decoration: inherit; /* no underline */
+      }
+
+      a.nostyle:hover {
+        color: inherit; /* blue colors for links too */
+        text-decoration: inherit; /* no underline */
+      }
+
+
     
       @keyframes blinky {
           0% { background-color: #ff0000ff; }
@@ -394,9 +447,9 @@
       <!--<div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>-->
       <div class="btn" onclick="showOverlay();sct('agenda')">agenda de palestras</div>
       <div class="btn" onclick="showOverlay();sct('noticias')">notícias</div>
-      <div class="btn" onclick="showOverlay()">redes sociais</div>
-      <div class="btn" onclick="showOverlay()">sobre a Semana</div>
-      <div class="btn" onclick="showOverlay()">edições anteriores</div>
+      <div class="btn" onclick="showOverlay();sct('redes')">redes sociais</div>
+      <div class="btn" onclick="showOverlay();sct('sobre')">sobre a Semana</div>
+      <div class="btn" onclick="showOverlay();sct('anteriores')">edições anteriores</div>
     </div>
   </div>
   
@@ -466,20 +519,71 @@
       </div>
       <div id="overlay-sobre" class="panel">
         <h1>Sobre</h1>
+        <p>
+          A Semana da Computação é um evento anual que promove um ciclo de palestras sobre os mais variados temas da computação. Realizado desde 2009 como Encontro do BCC, nesta 12ª edição está cheio de experimentos no formato e sendo realizado totalmente online para poder manter a tradição. Este é um evento aberto a todos os amantes de computação e que agora poderá ser acompanho de qualquer lugar.
+        </p>
+        <h2>Equipe</h2>
+        <p>
+          A semana é realiza <del>quase</del> todo ano pelo trabalho conjunto de diversos voluntários e tomamos este espaço para agradecer-los.
+        </p>
+        <div id="equipe">
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+          <div class="card">
+            <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
+            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
+          </div>
+        </div>
+        <h2>Apoiadores</h2>
+        <p>
+          Além da equipe, não podemos deixar de agradecer as empresas e instituições que apoiam a semana.
+        </p>
+        <p>SAMPLE DE EMPRESA AQUI</p>
       </div>
       <div id="overlay-anteriores" class="panel anteriores">
         <h1>Anos Anteriores</h1>
-        <div class="btn" href="https://bcc.ime.usp.br/semana/">XI 2019</div>
-        <div class="btn" href="https://bcc.ime.usp.br/semana-old/2018">X 2018</div>
-        <div class="btn" href="https://bcc.ime.usp.br/encontro/2017">IX 2017</div>
-        <div class="btn" href="http://bcc.ime.usp.br/encontro/2016/#/">VIII 2016</div>
-        <div class="btn" href="http://bcc.ime.usp.br/encontro/2015">VII 2015</div>
-        <div class="btn" href="http://bcc.ime.usp.br/40anos/">VI 2014</div>
-        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2013/">V 2013</div>
-        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2012/">IV 2012</div>
-        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2011/">III 2011</div>
-        <div class="btn" href="http://www.ime.usp.br/~encontrobcc/2010/">II 2010</div>
+        <a class="nostyle" target="_blank" href="https://bcc.ime.usp.br/semana/"><div class="btn">XI 2019</div></a>
+        <a class="nostyle" target="_blank" href="https://bcc.ime.usp.br/semana-old/2018"><div class="btn">X 2018</div></a>
+        <a class="nostyle" target="_blank" href="https://bcc.ime.usp.br/encontro/2017"><div class="btn">IX 2017</div></a>
+        <a class="nostyle" target="_blank" href="http://bcc.ime.usp.br/encontro/2016/#/"><div class="btn">VIII 2016</div></a>
+        <a class="nostyle" target="_blank" href="http://bcc.ime.usp.br/encontro/2015"><div class="btn">VII 2015</div></a>
+        <a class="nostyle" target="_blank" href="http://bcc.ime.usp.br/40anos/"><div class="btn">VI 2014</div></a>
+        <a class="nostyle" target="_blank" href="http://www.ime.usp.br/~encontrobcc/2013/"><div class="btn">V 2013</div></a>
+        <a class="nostyle" target="_blank" href="http://www.ime.usp.br/~encontrobcc/2012/"><div class="btn">IV 2012</div></a>
+        <a class="nostyle" target="_blank" href="http://www.ime.usp.br/~encontrobcc/2011/"><div class="btn">III 2011</div></a>
+        <a class="nostyle" target="_blank" href="http://www.ime.usp.br/~encontrobcc/2010/"><div class="btn">II 2010</div></a>
       </div>
+      <div class="spacerXLL"></div>
     </div>
   </div>
   
@@ -630,6 +734,10 @@
         sinopse.style.display = "block"
         esconde.innerHTML = "esconde sinopse"
       }
+    }
+
+    let open = (link) => {
+      window.open(link, "_blank")
     }
     
     refreshSite()
