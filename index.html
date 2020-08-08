@@ -295,21 +295,34 @@
         display: flex;
         flex-flow: column;
         text-align: center;
-        padding: 1rem 0.5rem 1rem 0.5rem;
+        margin: 1rem 0.5rem 1rem 0.5rem;
+      }
+
+      #equipe .card:hover {
+        cursor: pointer;
+      }
+
+      #equipe .name:hover {
+        cursor: pointer;
+      }
+
+      #equipe .photo:hover {
+        cursor: pointer;
       }
 
       @media (min-width: 30rem) {
         #equipe>.card {
-          padding: 1rem;
+          margin: 1rem;
         }
       }
 
       #equipe .photo {
-        height: 8rem;
-        width: 8rem;
-        border-radius: 4rem;
-        margin-bottom: 0.4rem;
-        box-shadow: 0rem 0rem 0.8rem 0px rgba(0,143,0,1);
+        height: 6rem;
+        width: 6rem;
+        /*border-radius: 4rem;*/
+        margin: 1rem;
+        border: 1px dashed white;
+        /*box-shadow: 0rem 0rem 0.8rem 0px rgba(0,143,0,1);*/
       }
 
       #equipe .name {
@@ -520,17 +533,17 @@
       <div id="overlay-sobre" class="panel">
         <h1>Sobre</h1>
         <p>
-          A Semana da Computação é um evento anual que promove um ciclo de palestras sobre os mais variados temas da computação. Realizado desde 2009 como Encontro do BCC, nesta 12ª edição está cheio de experimentos no formato e sendo realizado totalmente online para poder manter a tradição. Este é um evento aberto a todos os amantes de computação e que agora poderá ser acompanho de qualquer lugar.
+          A Semana da Computação é um evento anual que promove um ciclo de palestras sobre os mais variados temas da computação. Realizado desde 2009 como Encontro do BCC, nesta 12ª edição está cheio de experimentos no formato e sendo realizado totalmente online para poder manter a tradição. Este é um evento aberto a todos os amantes de computação e que agora poderá ser acompanhado de qualquer lugar.
         </p>
         <h2>Equipe</h2>
         <p>
           A semana é realiza <del>quase</del> todo ano pelo trabalho conjunto de diversos voluntários e tomamos este espaço para agradecer-los.
         </p>
         <div id="equipe">
-          <div class="card">
+          <a href="https://github.com/elUrso" target="_black" class="nostyle card">
             <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
-            <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
-          </div>
+            <div class="name">Vitor Silva</div>
+          </a>
           <div class="card">
             <img src="res/faces/vitor.gif" class="photo" alt="O vitor sorrindo numa foto"/>
             <a href="https://github.com/elUrso" class="nostyle name">Vitor Silva</a>
