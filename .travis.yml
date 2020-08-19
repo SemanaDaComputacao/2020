@@ -3,12 +3,12 @@ language: generic
 addons:
   ssh_known_hosts: bcc.ime.usp.br
 
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - chmod 600 /tmp/deploy_rsa
+
 deploy:
   provider: script
-  script:
-    - echo "Deploying..."
-    - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
-    - ssh -oBatchMode=yes -i /tmp/deploy_rsa encontro-deploy@bcc.ime.usp.br /opt/semanadacomputacao/script.sh
-    - echo "Success!"
+  script: bash deploy.sh
   on:
-    branch: master
+    branch: test
