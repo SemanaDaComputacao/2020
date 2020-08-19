@@ -12,6 +12,6 @@ before_deploy:
 deploy:
   provider: script
   script:
-    - ssh encontro-deploy@bcc.ime.usp.br /opt/semanadacomputacao/script.sh
+    - ssh -oBatchMode=yes encontro-deploy@bcc.ime.usp.br /opt/semanadacomputacao/script.sh
   on:
     branch: master
