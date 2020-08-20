@@ -2,3 +2,4 @@
 .DS_Store
 ignore/credentials.json
 notes
+data/update-data.py
