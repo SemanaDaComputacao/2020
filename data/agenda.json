@@ -120,12 +120,12 @@
       "Sábado",
       "16:30",
       "17:45",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
+      "Compiladores e transcompiladores para leigos",
+      "Venha aprender os conceitos básicos de como se faz um compilador, como se transforma uma linguagem de programação em outra, e como isso tudo foi usado na prática para criar o Gryphon, o tradutor de Swift para Kotlin.",
+      "Vinícius Vendramini",
+      "IME-USP",
+      "Criador do Gryphon",
+      "Criador do Gryphon, o transcompilador que transforma código em Swift em código em Kotlin para desenvolver aplicativos de iOS e Android. Mestre em ciência da computação pelo IME.",
       "res/faces/profile.jpg"
     ],
     [
@@ -148,12 +148,12 @@
       "Sábado",
       "19:30",
       "20:45",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
-      "Em Breve",
+      "JavaScript internals: engine, runtimes e afins",
+      "Como o JS funciona no browser (e fora dele)? Qual a utilidade de um setTimeout com 0 segundos? Por que meu if para funcionar só no Chrome agora também está considerando o Edge? Como escrevendo meu JSzinho aqui ele funciona num celular?  Qual a diferença de usar const/let/var? \nSe você tem curiosidade de saber a resposta para essas e outras perguntas, essa palestra é para você. ;)",
+      "Carla Teodoro",
+      "Geekie",
+      "Tech Lead na Geekie",
+      "Formada em Engenharia Naval, migrou para programação por paixão, onde já tem 7 anos de experiência. Atualmente é Tech Lead na Geekie, onde trabalha há quase 3 anos, desenvolvendo soluções para o mercado de educação em React (web) e React Native (mobile). ",
       "res/faces/profile.jpg"
     ]
   ]
