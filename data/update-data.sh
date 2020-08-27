@@ -1,0 +1,2 @@
+curl -o agenda.json "https://sheets.googleapis.com/v4/spreadsheets/1IBa3rhKxT5d2nZ5Xt_Emu1TbdTQmu9fHykOVgH_w2kk/values/'agenda'?key=$gdrive_key"
+curl -o noticias.json "https://sheets.googleapis.com/v4/spreadsheets/1IBa3rhKxT5d2nZ5Xt_Emu1TbdTQmu9fHykOVgH_w2kk/values/'noticias'?key=$gdrive_key"
