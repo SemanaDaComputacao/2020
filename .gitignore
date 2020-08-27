@@ -3,3 +3,4 @@
 ignore/credentials.json
 notes
 data/update-data.py
+data/*.json
