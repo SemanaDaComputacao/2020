@@ -479,7 +479,7 @@
     <div class="spacer"></div>
     
     <div id="buttons" class="v-stack">
-      <!--<div class="btn" onclick="showOverlay()">palestra ao vivo <div class="red-dot"></div></div>-->
+      <div class="btn" onclick="goLive()">palestra ao vivo <div class="red-dot"></div></div>
       <div class="btn" onclick="showOverlay();sct('agenda')">agenda de palestras</div>
       <div class="btn" onclick="showOverlay();sct('noticias')">notícias</div>
       <div class="btn" onclick="showOverlay();sct('redes')">redes sociais</div>
@@ -754,6 +754,20 @@ frente do projeto. <br><br> Sobre o Palestrante <br><br> Em 2004 iniciou o curso
 
     let open = (link) => {
       window.open(link, "_blank")
+    }
+
+    let goLive = () => {
+      let qua = "https://youtu.be/PsTxPfvN2vE"
+      let qui = "https://youtu.be/jLmQQfS-9_A"
+      let sex = "https://youtu.be/Yj8bi8_C-gY"
+      let sab = "https://youtu.be/sneVxflxKWk"
+
+      let today = (new Date()).getDate()
+
+      if(today == 10) window.open(qui);
+      if(today == 11) window.open(sex);
+      if(today == 12) window.open(sab);
+      else window.open(qua); 
     }
     
     refreshSite()
